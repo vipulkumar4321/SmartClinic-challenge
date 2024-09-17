@@ -3,13 +3,14 @@ import axios from "axios";
 import "./Users.css"; // Import CSS file for styling
 
 function Users() {
-  const [data, setData] = useState({ users: [], phones: [] });
+  const [data, setData] = useState({ users: [] });
 
   useEffect(() => {
     axios
-      .get("/api/data")
+      .get("http://127.0.0.1:3001/user")
       .then((response) => {
         setData(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -36,14 +37,14 @@ function Users() {
               <td>{user.email}</td>
               <td>
                 <select>
-                  {data.phones.map((phone) => (
-                    <option key={phone.id} value={phone.id}>
-                      {phone.number}
+                  {user.phones.map((phone, index) => (
+                    <option key={index} value={phone}>
+                      {phone}
                     </option>
                   ))}
                 </select>
               </td>
-              <td>{user.creationDate}</td>
+              <td>{user.creation_date}</td>
             </tr>
           ))}
         </tbody>

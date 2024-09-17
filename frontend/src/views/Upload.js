@@ -26,7 +26,7 @@ function Upload() {
       const formData = new FormData();
       formData.append("file", file);
       axios
-        .post("/api/upload", formData)
+        .post("http://127.0.0.1:3001/users/upload", formData)
         .then((response) => {
           setUploading(false);
           console.log(response.data);
