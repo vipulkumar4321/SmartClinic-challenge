@@ -15,9 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Temporary setup. Move it to env
-const supabaseUrl = "https://qopldjkdnxzevntbibra.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcGxkamtkbnh6ZXZudGJpYnJhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyNjYyNzQ2MiwiZXhwIjoyMDQyMjAzNDYyfQ.fLr5TIQQJjErsGyYLZnsPkfq_pF9EIUwl6m2vwgtIKc";
+const supabaseUrl = process.env.URL;
+const supabaseKey = process.env.KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.post("/users/upload", upload.single("file"), async (req, res) => {
