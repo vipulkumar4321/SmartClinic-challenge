@@ -7,6 +7,9 @@ const csvParse = require("csv-parse");
 
 app.use(cors());
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 // Configure multer to handle file upload in memory
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -129,5 +132,5 @@ app.get("/users", async (req, res) => {
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
-  console.log(`Server started on port {port}`);
+  console.log(`Server started on port ${port}`);
 });
