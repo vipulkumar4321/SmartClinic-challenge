@@ -30,3 +30,16 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd;
 }
+
+.table-container {
+  position: relative;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  font-weight: bold;
+}

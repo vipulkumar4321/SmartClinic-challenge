@@ -4,6 +4,7 @@ import "./Users.css";
 
 function Users() {
   const [data, setData] = useState({ users: [] });
+  const [loading, setLoading] = useState(true); // New loading state
 
   useEffect(() => {
     axios
@@ -18,44 +19,50 @@ function Users() {
         };
 
         setData(modifiedData);
+        setLoading(false); // Set loading to false once data is fetched
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false); // Set loading to false in case of an error
       });
   }, []);
 
   return (
     <div className="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phones</th>
-            <th>Creation Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>
-                <select>
-                  {user.phones.map((phone, index) => (
-                    <option key={index} value={phone}>
-                      {phone}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>{user.creation_date}</td>
+      {loading ? (
+        <div className="spinner">Loading...</div> // Loading spinner
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phones</th>
+              <th>Creation Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <select>
+                    {user.phones.map((phone, index) => (
+                      <option key={index} value={phone}>
+                        {phone}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>{user.creation_date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
