@@ -22,6 +22,8 @@ const supabaseUrl = process.env.URL;
 const supabaseKey = process.env.KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.post("/users/upload", upload.single("file"), async (req, res) => {
   const file = req.file;
 
@@ -134,3 +136,5 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+module.exports = app;
