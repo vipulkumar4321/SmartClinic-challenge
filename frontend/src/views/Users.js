@@ -7,7 +7,7 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3001/users")
+      .get("https://smart-clinic-challenge-x5s5.vercel.app/users")
       .then((response) => {
         // Split the comma-separated phones into an array
         const modifiedData = {

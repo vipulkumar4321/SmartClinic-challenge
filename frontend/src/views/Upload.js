@@ -28,7 +28,10 @@ function Upload() {
       const formData = new FormData();
       formData.append("file", file);
       axios
-        .post("http://127.0.0.1:3001/users/upload", formData)
+        .post(
+          "https://smart-clinic-challenge-x5s5.vercel.app/users/upload",
+          formData
+        )
         .then((response) => {
           setUploading(false);
           setUploadComplete(true); // Set upload complete
