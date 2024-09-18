@@ -14,6 +14,7 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Temporary setup. Move it to env
 const supabaseUrl = "https://qopldjkdnxzevntbibra.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcGxkamtkbnh6ZXZudGJpYnJhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyNjYyNzQ2MiwiZXhwIjoyMDQyMjAzNDYyfQ.fLr5TIQQJjErsGyYLZnsPkfq_pF9EIUwl6m2vwgtIKc";
@@ -127,6 +128,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.listen(3001, () => {
-  console.log("Server started on port 3001");
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+  console.log(`Server started on port {port}`);
 });
