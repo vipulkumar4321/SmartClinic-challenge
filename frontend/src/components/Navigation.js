@@ -7,17 +7,17 @@ const Navigation = () => {
     <nav className="top-nav">
       <ul className="nav-list">
         <li className="nav-item">
-          <NavLink exact className="nav-button" activeClassName="active" to="/">
+          <NavLink className="nav-button" activeclassname="active" to="/">
             Home
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-button" activeClassName="active" to="/upload">
+          <NavLink className="nav-button" activeclassname="active" to="/upload">
             Upload
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-button" activeClassName="active" to="/users">
+          <NavLink className="nav-button" activeclassname="active" to="/users">
             Users
           </NavLink>
         </li>

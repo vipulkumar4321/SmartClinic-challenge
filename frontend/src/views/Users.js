@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Users.css"; // Import CSS file for styling
+import "./Users.css";
 
 function Users() {
   const [data, setData] = useState({ users: [] });
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3001/user")
+      .get("http://127.0.0.1:3001/users")
       .then((response) => {
-        setData(response.data);
-        console.log(response.data);
+        // Split the comma-separated phones into an array
+        const modifiedData = {
+          users: response.data.users.map((user) => ({
+            ...user,
+            phones: user.phones.split(",").map((phone) => phone.trim()),
+          })),
+        };
+
+        setData(modifiedData);
       })
       .catch((error) => {
         console.error(error);

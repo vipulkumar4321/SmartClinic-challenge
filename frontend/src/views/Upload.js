@@ -6,6 +6,7 @@ import "./Upload.css";
 function Upload() {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadComplete, setUploadComplete] = useState(false);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -13,11 +14,12 @@ function Upload() {
       // Validate if the file is a CSV
       if (selectedFile && selectedFile.type === "text/csv") {
         setFile(selectedFile);
+        setUploadComplete(false); // Reset the upload completion state
       } else {
         alert("Please upload only CSV files.");
       }
     },
-    accept: ".csv", // Restrict file types in the file input dialog
+    accept: ".csv", // Restrict file types to csv only
   });
 
   const handleUpload = async () => {
@@ -29,6 +31,7 @@ function Upload() {
         .post("http://127.0.0.1:3001/users/upload", formData)
         .then((response) => {
           setUploading(false);
+          setUploadComplete(true); // Set upload complete
           console.log(response.data);
         })
         .catch((error) => {
@@ -47,9 +50,30 @@ function Upload() {
         ) : (
           <p>Drag and drop a CSV file here, or click to select</p>
         )}
-        {file && <button onClick={handleUpload}>Upload</button>}
-        {uploading && <p>Uploading...</p>}
       </div>
+
+      {/* Conditionally render file details */}
+      {file && !uploadComplete && (
+        <div className="file-details">
+          <p>Selected file: {file.name}</p>
+        </div>
+      )}
+
+      {/* Conditionally render upload button */}
+      {file && !uploadComplete && (
+        <div className="upload-button-container">
+          <button onClick={handleUpload} disabled={uploading}>
+            {uploading ? "Uploading..." : "Upload"}
+          </button>
+        </div>
+      )}
+
+      {/* Show success message when upload is complete */}
+      {uploadComplete && (
+        <div className="success-message">
+          <p>File uploaded successfully!</p>
+        </div>
+      )}
     </div>
   );
 }
