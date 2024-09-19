@@ -29,7 +29,7 @@ function Upload() {
       formData.append("file", file);
       axios
         .post(
-          "https://smart-clinic-challenge-x5s5.vercel.app/users/upload",
+          "https://smart-clinic-challenge-backend.vercel.app/users/upload",
           formData
         )
         .then((response) => {
